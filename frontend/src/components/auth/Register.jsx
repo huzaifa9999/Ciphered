@@ -1,5 +1,6 @@
 import { useState } from "react";
 import React from "react";
+import axios from "axios";
 import {
   Container,
   FormControl,
@@ -9,8 +10,10 @@ import {
   Button,
   Alert,
 } from "@mui/material";
-
+import Snackbar from "@mui/material/Snackbar";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -19,75 +22,86 @@ const Register = () => {
   const [pfp, setPfp] = useState();
   const [picLoading, setPicLoading] = useState(false);
 
-
-
-
-  const profilePic = async(pfps) => {
+  const profilePic = async (pfps) => {
     setPicLoading(true);
     if (pfps === undefined) {
       <Alert variant="filled" severity="error">
         Please upload an image only!!
-      </Alert>
+      </Alert>;
       return;
     }
-console.log(pfps);
+    console.log(pfps);
     if (pfps.type === "image/jpeg" || pfps.type === "image/png") {
-    const formData=new FormData();
-    formData.append("file",pfps);
-    formData.append("upload_preset","confess");
-    formData.append("cloud_name","dg9amdzm3");
-  //   fetch("https://api.cloudinary.com/v1_1/dg9amdzm3/image/upload",{
-  //     method: "post",
-  //     body: formdata,
+      const formData = new FormData();
+      formData.append("file", pfps);
+      formData.append("upload_preset", "confess");
+      formData.append("cloud_name", "dg9amdzm3");
 
-  //   })
-    
-    
-  //   .then((res)=>{
-  //     res.json()
-  //   }).then((formdata)=>{
-  //     // console.log(formdata.url.toString())
-  //     // setPfp(formdata.url.toString())
-  //  console.log( new URLSearchParams(formdata).toString());
-  //   setPfp(new URLSearchParams(formdata).toString());
-   
-
-  //     setPicLoading(false);
-
-  //   })
-    
-  //   .catch((error)=>{
-  //     console.log(error);
-  //     setPicLoading(false);
-  //   });
-
-
-const res = await fetch("https://api.cloudinary.com/v1_1/dg9amdzm3/image/upload",{
-      method: "post",
-      body: formData
-
-    })
-const data= await res.json();
-setPfp(data.url.toString());
-console.log(data.url.toString());
-setPicLoading(false);
-    }
-
-    else{
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dg9amdzm3/image/upload",
+        {
+          method: "post",
+          body: formData,
+        }
+      );
+      const data = await res.json();
+      setPfp(data.url.toString());
+      console.log(data.url.toString());
+      setPicLoading(false);
+    } else {
       <Alert variant="filled" severity="error">
-      Please upload an image only!!
-    </Alert>
-    setPicLoading(false);
-    return;
+        Please upload an image only!!
+      </Alert>;
+      setPicLoading(false);
+      return;
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setPicLoading(true);
+    if (!email || !username || !password || !name) {
+      <Alert variant="filled" severity="error">
+        please fill all fields
+      </Alert>;
 
+      setPicLoading(false);
+      return;
+    }
 
-  const handleSubmit = () => {};
+    if (password !== confirmpassword) {
+      return <Snackbar autoHideDuration={6000} open="true" message="Note archived" />;
 
+      // alert("recheck passsword");
+      // return;
+    }
+    console.log(name, email, password, pfp);
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        "/user",
+        { name, email, password, username, pfp },
+        config
+      );
 
+      <Alert variant="filled" severity="success">
+        success
+      </Alert>;
 
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setPicLoading(false);
+      navigate("/chats");
+    } catch (error) {
+      <Alert variant="filled" severity="error">
+        dem
+      </Alert>;
+      setPicLoading(false);
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -137,8 +151,11 @@ setPicLoading(false);
           />
         </FormControl>
 
-        <Button variant="contained" onSubmit={handleSubmit}
-         isLoading={picLoading}>
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          isLoading={picLoading}
+        >
           Sign-up
         </Button>
       </Stack>

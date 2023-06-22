@@ -1,9 +1,14 @@
 import React from 'react'
+import { Route,Routes } from "react-router-dom";
 import Home from "./pages/Home"
+import Confessions from './pages/Chats';
 const App = () => {
   return (
     <>
-      <Home/>
+  <Routes>
+      <Route path="/" element={<Home/>} exact />
+      <Route path="/Confessions" element={<Confessions/>} />
+      </Routes>
     </>
   )
 }

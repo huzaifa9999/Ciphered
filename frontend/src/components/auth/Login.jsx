@@ -1,10 +1,52 @@
 import { Container, FormControl, FormLabel, Input, Stack,Button } from "@mui/material";
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const Login = () => {
-  const handleSubmit = () => {};
+  
+const navigate=useNavigate();
+
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+const [loading,setLoading]=useState(false);
+
+const handleSubmit = async() => {
+setLoading(true);
+  if(!username||!password){
+    alert("please fill all fields");
+    setLoading(false);
+    return;
+  
+  }
+
+  try{
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      "/user/login",
+      { username, password },
+      config
+    );
+
+alert("success");
+
+// localStorage.setItem("userinfo",JSON.stringify(data));
+setLoading(false);
+navigate("/confessions");
+  }catch(error){
+console.log(error.message);
+alert("an error has occured");
+setLoading(false);
+return;
+  }
+
+};
+
+
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -26,7 +68,7 @@ const Login = () => {
             />
           </FormControl>
 
-      <Button variant="contained">
+      <Button variant="contained" onClick={handleSubmit} isLoading={loading}>
         Sign-in
       </Button>
         </Stack>
