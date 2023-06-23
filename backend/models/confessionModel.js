@@ -1,14 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const confessionSchema= mongoose.Schema({
-    creator:{type:mongoose.Types.ObjectId,ref:"Username" },
-    confession:{type:String, required:true}
-},
-{
+const confessionSchema = mongoose.Schema(
+  {
+    userId: { type: String, required: true },
+
+    username: { type: String, required: true },
+    pfp: { type: String, required: true },
+    description: { type: String, required: true },
+  },
+  {
     timestamps: true,
   }
-  );
+);
 
-  const Confession = mongoose.model('Confession',confessionSchema);
+const Post = mongoose.model("Post", confessionSchema);
 
-  module.exports= Confession ;
+module.exports = Post;
