@@ -1,38 +1,45 @@
 import React from "react";
-import ime from "../assests/login.jpg";
+// import ime from "../assests/login.jpg";
 import { Box, Container } from "@mui/material";
-
+import Avatar from "@mui/material/Avatar";
 const confessionCard = (e) => {
   return (
     <>
-      <Box sx={{
-        display:"flex",
-        flexWrap:"wrap",
-        marginX:"1rem",
-      }}>
-        <div className="flex flex-col items-start justify-center bg-[#1F1F1F] p-[1rem] max-w-[52rem] flex-wrap ">
-          <div className="flex flex-row item-start justify-start   w-[100%] p-[.5rem]  ">
-            <div className="image  flex  flex-row justify-center items-center p-[.5rem] ">
-              <img
-                src={ime}
-                alt="userimg"
-                className="rounded-[50%]  h-[2rem]  w-[2rem] border border-gray-500 border-2"
-              />
+      {/* <Box
+        sx={{
+          width: "100%",
+          height: "auto",
+          padding: ".2rem",
+          display: "flex",
+          alignItems: "start",
+flexWrap:"wrap",
+          "&:hover": {
+            bgcolor: "#6d78ba",
+          },
+
+          gap: 3,
+        }}
+      > */}
+        <div className="flex w-[100%] flex-col items-start hover:bg-[#6d78ba] p-[.2rem] h-auto gap-3 ">
+          <div className="flex items-center ">
+            <div className="self-center mr-2 ml-0">
+              <Avatar alt="Remy Sharp" src={e.pfp} sx={{ width: 56, height: 56 }} />
             </div>
-            <div className="username flex items-center jusitfy-center">
-              <h1 className="text-[25px] text-white weight-500">huzaifa</h1>
+
+            <div className="overflow-hidden truncate mb-0 text-[#b3ccdb] font-semi-bold">
+              <h2 className="text-[1.6rem] ml-[.5rem]">{e.username}</h2>
+
             </div>
           </div>
 
-          <div className="flex justify-center items-center ml-3 p-[1.5rem]flex-wrap h-auto border border-gray-500  ">
-            <h2 className="text-[1rem] flex  items-center justify-center p-[1rem] ml-3 flex-wrap weight-700 text-white">
-              Tailwind lets you conditionally apply utility classes in different
-              states using variant modifiers. For example, use hover:mt-8 to
-              only apply the mt-8 utility on hover.
-            </h2>
+          <div className=" text-white h-auto ml-[4.5rem] flex  mr-[.9rem] font-regular">
+            <p>
+              {e.description}
+            </p>
           </div>
+
         </div>
-      </Box>
+      {/* </Box> */}
     </>
   );
 };

@@ -43,3 +43,10 @@ code {
 .logincontent{
   background-image: url("./assests/login.jpg");
 }
+
+#cont{
+  background-image:url("./assests/blurry-gradient-haikei.png");
+  background-position: center center;
+  background-size: cover;
+
+}

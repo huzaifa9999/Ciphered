@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route,Routes } from "react-router-dom";
 import Home from "./pages/Home"
-import Confessions from './pages/Chats';
+import Confessions from './pages/Confessions';
 const App = () => {
   return (
     <>
