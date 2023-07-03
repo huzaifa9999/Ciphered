@@ -18,8 +18,9 @@ const createConfession = asyncHandler(async (req, res) => {
     // res.status(201).json(post);
 
     const newPost = await Post.create({
-      userId: user._id,
+     
       username: user.username,
+      userId:userId,
       pfp: user.pfp,
       description,
     })

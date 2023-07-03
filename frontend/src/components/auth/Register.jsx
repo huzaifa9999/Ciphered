@@ -91,10 +91,18 @@ const Register = () => {
       <Alert variant="filled" severity="success">
         success
       </Alert>;
+      const Username = data.username;
+      const Pfp = data.pfp;
+      const id = JSON.stringify(data._id);
+      const token = JSON.stringify(data.token);
 
       localStorage.setItem("userInfo", JSON.stringify(data));
+      localStorage.setItem("username", Username);
+      localStorage.setItem("pfp", Pfp);
+      localStorage.setItem("id", id);
+      localStorage.setItem("token", token);
       setPicLoading(false);
-      navigate("/chats");
+      navigate("/Confessions");
     } catch (error) {
       <Alert variant="filled" severity="error">
         dem

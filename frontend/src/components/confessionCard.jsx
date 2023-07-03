@@ -3,6 +3,7 @@ import React from "react";
 import { Box, Container } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 const confessionCard = (e) => {
+ 
   return (
     <>
       {/* <Box
@@ -28,7 +29,7 @@ flexWrap:"wrap",
 
             <div className="overflow-hidden truncate mb-0 text-[#b3ccdb] font-semi-bold">
               <h2 className="text-[1.6rem] ml-[.5rem]">{e.username}</h2>
-
+              <p>Timestamp: {e.timestamp}</p>
             </div>
           </div>
 

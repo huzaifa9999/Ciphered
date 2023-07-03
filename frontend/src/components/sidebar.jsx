@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Box, Stack, Button, Avatar, useMediaQuery } from "@mui/material";
 import logo from "../assests/icons8-batman-logo-1600-removebg-preview.png";
 import "../index.css";
 import { BiSolidGroup } from "react-icons/bi";
 import axios from "axios";
 import UserCard from "../components/UserCard";
-import img from "../assests/wp5814594-naruto-uzumaki-minimal-art-wallpapers.jpg"
+// import img from "../assests/wp5814594-naruto-uzumaki-minimal-art-wallpapers.jpg"
+import { UserState } from "../Context";
 
 
 const Sidebar = () => {
+    const { username, userpfp } = UserState();
 
     const [data, setData] = useState([]);
     const allUsers = async () => {
@@ -16,7 +18,19 @@ const Sidebar = () => {
         const data = res.data;
         setData(data);
     };
+//     const [auth ,setAuth]=useState(usertoken);
+// const allUsers=async()=>{
+//     try{
+//         const config={
+//             headers:{
+//                 Authorization: `Bearer ${auth}`,
+//             },
+//         }
 
+//         const {data}= await axios.get("/user/",config);
+//         setData(data);
+//     }catch(e){console.log(e);}
+// }
 
 
     useEffect(() => {
@@ -32,13 +46,15 @@ const Sidebar = () => {
         <>
 
 
+
             <div className="flex flex-col h-[100%] w-[10%] bg-[#0f111f]  items-center justify-start">
                 <Avatar alt="Remy Sharp" src={logo} sx={{ width: 100, height: 100 }} />
 
                 <div className="flex items-center flex-col justify-center p-[.5rem] gap-2">
-                <Avatar alt="Remy Sharp" src={img} sx={{ width: 130, height: 130 }} />
-<h1 className="text-white text-[1rem] m-[.5rem] "> HUZAIFA999</h1>
-<Button variant="outlined">EDIT PROFILE</Button>
+                    <Avatar alt="Remy Sharp" src={userpfp} sx={{ width: 130, height: 130 }} />
+                    <h1 className="text-white text-[1rem] m-[.5rem] "> {username}</h1>
+                    <Button variant="outlined">EDIT PROFILE</Button>
+                    <Button variant="outlined">Delete account</Button>
                 </div>
 
             </div>
