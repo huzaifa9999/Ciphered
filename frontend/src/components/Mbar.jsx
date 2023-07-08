@@ -9,9 +9,10 @@ import img from "../assests/wp5814594-naruto-uzumaki-minimal-art-wallpapers.jpg"
 import UserCard from "../components/UserCard";
 
 import { FaBars, FaTimes } from 'react-icons/fa';
+// import { UserState } from "../Context";
 
 const Mbar = () => {
-
+// const {username,userpfp}=UserState();
     const [click, setclick] = useState(false)
     const Click = () => setclick(!click);
 
@@ -41,7 +42,7 @@ const Mbar = () => {
 
                     <Avatar alt="Remy Sharp" src={img} sx={{ width: 200, height: 200 }} />
 
-                    <h1 className="text-white text-[1.5rem] m-[1rem]" >USERNAME</h1>
+                    <h1 className="text-white text-[1.5rem] m-[1rem]" >huew</h1>
                     <Button variant="outlined">EDIT PROFILE</Button>
                    
                     <div className="flex flex-col h-[100%] w-full p-[.5rem]  items-center  text-[1rem] overflow-hidden hover:overflow-y-scroll  ">

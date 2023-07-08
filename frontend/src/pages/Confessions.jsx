@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Box, Stack, Button, Avatar, useMediaQuery } from "@mui/material";
 import Mbar from "../components/Mbar";
-
 import logo from "../assests/icons8-batman-logo-1600-removebg-preview.png";
 import "../index.css";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
 import ConfCard from "../components/confessionCard";
 import Sidebar from "../components/sidebar";
 const Confessions = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const [posts, setPosts] = useState([]);
+
+
   const allConfessions = async () => {
-    const res = await axios.get("confession/");
-    const data = res.data;
+    const {data} = await axios.get("confession/");
+    // const data = res.data;
+    console.log(data)
     setPosts(data);
 
   };
@@ -60,6 +61,7 @@ const Confessions = () => {
                       username={e.username}
                       pfp={e.pfp}
                       description={e.description}
+                      createdAt={e.createdAt.split('T')[1].slice(0,5)}
                     />
                   </>
                 );

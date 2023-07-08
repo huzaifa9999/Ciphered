@@ -7,6 +7,7 @@ const UserProvider = ({ children }) => {
     const [userId, setUserid] = useState();
     const [userpfp, setPfp] = useState();
     const [usertoken, setToken] = useState();
+    const [logged, setLogged] = useState(false);
 
     // const updateUser = (userData) => {
     //     setUser(userData);
@@ -22,6 +23,7 @@ const UserProvider = ({ children }) => {
         }
         const storedid = localStorage.getItem('id');
         if (storedid) {
+          setLogged(!logged)
           setUserid(storedid);
         }
         const storedtoken = localStorage.getItem('token');
@@ -32,7 +34,7 @@ const UserProvider = ({ children }) => {
       }, []);
 
     return (
-        <UserContext.Provider value={{ username,userId,userpfp,usertoken }}>
+        <UserContext.Provider value={{ username,userId,userpfp,usertoken,logged}}>
             {children}
         </UserContext.Provider>
     );

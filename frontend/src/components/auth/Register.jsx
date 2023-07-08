@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
 import {
@@ -10,8 +10,10 @@ import {
   Button,
   Alert,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux"
 import Snackbar from "@mui/material/Snackbar";
 import { useNavigate } from "react-router-dom";
+import { register } from "../../actions/userActions";
 const Register = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState();
@@ -22,8 +24,13 @@ const Register = () => {
   const [pfp, setPfp] = useState();
   const [picLoading, setPicLoading] = useState(false);
 
+
+  const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
+
   const profilePic = async (pfps) => {
-    setPicLoading(true);
+    // setPicLoading(true);
     if (pfps === undefined) {
       <Alert variant="filled" severity="error">
         Please upload an image only!!
@@ -31,7 +38,7 @@ const Register = () => {
       return;
     }
     console.log(pfps);
-    if (pfps.type === "image/jpeg" || pfps.type === "image/png") {
+    if (pfps.type === "image/jpeg" || pfps.type === "image/png"|| pfps.type === "image/jpg") {
       const formData = new FormData();
       formData.append("file", pfps);
       formData.append("upload_preset", "confess");
@@ -47,69 +54,37 @@ const Register = () => {
       const data = await res.json();
       setPfp(data.url.toString());
       console.log(data.url.toString());
-      setPicLoading(false);
+      // setPicLoading(false);
     } else {
       <Alert variant="filled" severity="error">
         Please upload an image only!!
       </Alert>;
-      setPicLoading(false);
+      // setPicLoading(false);
       return;
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setPicLoading(true);
+
     if (!email || !username || !password || !name) {
-      <Alert variant="filled" severity="error">
-        please fill all fields
-      </Alert>;
-
-      setPicLoading(false);
-      return;
-    }
-
-    if (password !== confirmpassword) {
-      return <Snackbar autoHideDuration={6000} open="true" message="Note archived" />;
-
-      // alert("recheck passsword");
+      alert('please fiill all fields')
       // return;
     }
-    console.log(name, email, password, pfp);
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      const { data } = await axios.post(
-        "/user",
-        { name, email, password, username, pfp },
-        config
-      );
 
-      <Alert variant="filled" severity="success">
-        success
-      </Alert>;
-      const Username = data.username;
-      const Pfp = data.pfp;
-      const id = JSON.stringify(data._id);
-      const token = JSON.stringify(data.token);
+    else if (password !== confirmpassword) {
+      alert("password doesnt match");
 
-      localStorage.setItem("userInfo", JSON.stringify(data));
-      localStorage.setItem("username", Username);
-      localStorage.setItem("pfp", Pfp);
-      localStorage.setItem("id", id);
-      localStorage.setItem("token", token);
-      setPicLoading(false);
-      navigate("/Confessions");
-    } catch (error) {
-      <Alert variant="filled" severity="error">
-        dem
-      </Alert>;
-      setPicLoading(false);
     }
+    // console.log(name, email, password, pfp);
+    else dispatch(register(name, email, username, password, pfp));
+
   };
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/confessions");
+    }
+  }, [navigate, userInfo]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -162,7 +137,7 @@ const Register = () => {
         <Button
           variant="contained"
           onClick={handleSubmit}
-          isLoading={picLoading}
+        // isLoading={picLoading}
         >
           Sign-up
         </Button>

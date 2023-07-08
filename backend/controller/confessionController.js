@@ -56,4 +56,7 @@ res.send(confession);
 
   }catch(error){console.log(error);}
 })
+
+
+
 module.exports = { createConfession, allConfessions,userConfession };

@@ -27,6 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(201).json({
       _id: user._id,
       name: user.name,
+      email:user.email,
       username: user.username,
       password: user.password,
       pfp: user.pfp,
@@ -46,6 +47,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       username: user.username,
+      email:user.email,
       pfp: user.pfp,
       token: generateToken(user._id),
     });
@@ -65,12 +67,39 @@ const allUsers = asyncHandler(async (req, res) => {
   }
 });
 
-const oneUser = asyncHandler(async (req, res) => {
-  try {
-    const user = await User.findOne({ _id: req.params.id });
-    res.send(user);
-  } catch (error) {
-    console.log(error);
+
+const updateUser=asyncHandler(async (req, res) => {
+
+  const user = await User.findById(req.user.id);
+  if (user) {
+    user.username = req.body.username || user.username;
+    user.email = req.body.email || user.email;
+    user.name = req.body.name || user.name;
+    //This will encrypt automatically in our model
+    if (req.body.password) {
+      user.password = req.body.password || user.password;
+    }
+
+    if(req.body.pfp)
+    {
+      user.pfp=req.body.pfp||user.pfp
+    }
+
+   
+    const updateUser = await user.save();
+    res.json({
+      _id: updateUser._id,
+      name: updateUser.name,
+      password: updateUser.password,
+      pfp: updateUser.pfp,
+      email: updateUser.email,
+      token: generateToken(updateUser._id),
+    });
+  } else {
+    res.status(401);
+    throw new Error('User Not found');
   }
-});
-module.exports = { registerUser, authUser, allUsers, oneUser };
+
+})
+
+module.exports = { registerUser, authUser, allUsers,updateUser };

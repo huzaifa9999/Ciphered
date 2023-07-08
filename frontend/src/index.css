@@ -3,6 +3,7 @@
   --secondary: cornflowerblue;
 }
 
+
 @tailwind base;
 *::-webkit-scrollbar {
   width: 2px;

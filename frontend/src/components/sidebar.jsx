@@ -1,39 +1,41 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Container, Box, Stack, Button, Avatar, useMediaQuery } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, Stack, Button, Avatar } from "@mui/material";
 import logo from "../assests/icons8-batman-logo-1600-removebg-preview.png";
 import "../index.css";
 import { BiSolidGroup } from "react-icons/bi";
 import axios from "axios";
 import UserCard from "../components/UserCard";
-// import img from "../assests/wp5814594-naruto-uzumaki-minimal-art-wallpapers.jpg"
-import { UserState } from "../Context";
+
+import img from "../assests/wp5814594-naruto-uzumaki-minimal-art-wallpapers.jpg"
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../actions/userActions";
+import { Link, useNavigate } from "react-router-dom";
+// import { UserState } from "../Context";
 
 
 const Sidebar = () => {
-    const { username, userpfp } = UserState();
-
+    // const { username, userpfp, userId } = UserState();
+    // const [detail, setDetail] = useState(null);
     const [data, setData] = useState([]);
+
     const allUsers = async () => {
         const res = await axios.get("/user/");
         const data = res.data;
         setData(data);
+
     };
-//     const [auth ,setAuth]=useState(usertoken);
-// const allUsers=async()=>{
-//     try{
-//         const config={
-//             headers:{
-//                 Authorization: `Bearer ${auth}`,
-//             },
-//         }
 
-//         const {data}= await axios.get("/user/",config);
-//         setData(data);
-//     }catch(e){console.log(e);}
-// }
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
 
-
+    const handleLogout = (e) => {
+        dispatch(logout());
+        navigate("/")
+    }
     useEffect(() => {
+        // userDetails();
         allUsers();
 
     }, []);
@@ -51,11 +53,18 @@ const Sidebar = () => {
                 <Avatar alt="Remy Sharp" src={logo} sx={{ width: 100, height: 100 }} />
 
                 <div className="flex items-center flex-col justify-center p-[.5rem] gap-2">
-                    <Avatar alt="Remy Sharp" src={userpfp} sx={{ width: 130, height: 130 }} />
-                    <h1 className="text-white text-[1rem] m-[.5rem] "> {username}</h1>
-                    <Button variant="outlined">EDIT PROFILE</Button>
-                    <Button variant="outlined">Delete account</Button>
+                    <Avatar alt="Remy Sharp" src={userInfo?.pfp} sx={{ width: 130, height: 130 }} />
+                    <h1 className="text-white text-[1rem] m-[.5rem] "> {userInfo?.username}</h1>
+                   
                 </div>
+
+                <Button variant="contained"><Link to="/MyProfile">view profile</Link></Button>
+                <br>
+
+                </br>
+                <Button variant="contained" onClick={handleLogout}>logout</Button>
+                {/* <Profile username={username} pfp={userpfp} /> */}
+
 
             </div>
             <div className="flex flex-col h-[100%] w-[20%]  p-[.5rem] bg-[#050a0a] border border-black border-2 overflow-hidden hover:overflow-y-scroll">

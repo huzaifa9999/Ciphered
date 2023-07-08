@@ -1,59 +1,33 @@
 import { Container, FormControl, FormLabel, Input, Stack, Button } from "@mui/material";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { login } from "../../actions/userActions";
+// import Cookie from "js-cookie";
+import {useDispatch, useSelector} from "react-redux"
 const Login = () => {
 
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+const dispatch = useDispatch();
+const userLogin=useSelector((state)=>state.userLogin);
 
-  const handleSubmit = async () => {
-    setLoading(true);
-    if (!username || !password) {
-      alert("please fill all fields");
-      setLoading(false);
-      return;
+const{loading,error,userInfo}=userLogin;
 
-    }
+useEffect(() => {
 
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
+  if(userInfo){
+    navigate("/confessions");
+  }
+}, [navigate,userInfo])
 
-      const { data } = await axios.post(
-        "user/login",
-        { username, password },
-        config
-      );
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch(login(email,password));
     
-      const Username=data.username;
-     const pfp=data.pfp;
-     const id=data._id;
-     const token=JSON.stringify(data.token);
-      // console.log(data.pfp)
-      alert("success");
-      
-      localStorage.setItem("username",Username);
-      localStorage.setItem("pfp",pfp);
-      localStorage.setItem("id",id);
-      localStorage.setItem("token",token);
- 
-      setLoading(false);
-      navigate("/confessions");
-    } catch (error) {
-      console.log(error.message);
-      alert("an error has occured");
-      setLoading(false);
-      return;
-    }
-
   };
 
 
@@ -65,8 +39,8 @@ const Login = () => {
           <FormControl id="username" isRequired>
             <FormLabel>UserName</FormLabel>
             <Input
-              placeholder="Username"
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
           <FormControl id="password" isRequired>
@@ -78,7 +52,7 @@ const Login = () => {
             />
           </FormControl>
 
-          <Button variant="contained" onClick={handleSubmit} isLoading={loading}>
+          <Button variant="contained" onClick={handleSubmit} >
             Sign-in
           </Button>
         </Stack>
