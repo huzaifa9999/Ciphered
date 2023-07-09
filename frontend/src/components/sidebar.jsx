@@ -58,11 +58,18 @@ const Sidebar = () => {
                    
                 </div>
 
-                <Button variant="contained"><Link to="/MyProfile">view profile</Link></Button>
+               <Link to="/MyProfile"><button class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+               View Profile
+              </button></Link>
                 <br>
 
                 </br>
-                <Button variant="contained" onClick={handleLogout}>logout</Button>
+                {/* <Button variant="contained" onClick={handleLogout}>logout</Button>
+                 */}
+                 <button  onClick={handleLogout} class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+      Logout
+              </button>
+
                 {/* <Profile username={username} pfp={userpfp} /> */}
 
 

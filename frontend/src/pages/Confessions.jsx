@@ -49,7 +49,15 @@ const Confessions = () => {
 
           </div>
 
-          <Link to="/create"><Button variant="outlined" >Create Confession</Button></Link>
+          <Link to="/create">
+          {/* <Button variant="outlined" >Create Confession</Button>
+           */}
+
+           <button class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] ml-[2rem] mb-[1.5rem] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                Create new Confession
+              </button>
+
+          </Link>
 
           <div className=" ml-[1rem] mb-[1rem] w-[100%] h-[100%] flex flex-col flex-grow text-white  overflow-hidden hover:overflow-y-scroll ">
 

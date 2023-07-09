@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // import "../index.css";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
+import logo from "../assests/icons8-batman-logo-1600-removebg-preview.png"
 // import loginimg from "../assests/login.jpg";
 import {
   Container,
@@ -11,6 +12,8 @@ import {
   TabPanel,
   Button,
   Typography,
+  Avatar,
+  Stack,
 } from "@mui/material";
 const Home = () => {
   const [register, setRegister] = useState(true);
@@ -21,33 +24,39 @@ const Home = () => {
 
   return (
     <>
-      <Container maxWidth="sm">
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "2rem",
-            margin: "40px 0 15px 0",
-            alignItems: "center",
-            background: "rgba(255, 255, 255, 0.7)",
-            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-            border: "1px solid rgba(255, 255, 255, 0.77)",
-            backdropFilter: "blur( 9px )",
-            // -webkit-backdrop-filter: "blur( 1px )",
-            height: "100%",
-            width: "100%",
-            borderRadius: "20px",
-          }}
-        >
-          <h1 className="text-white pt-[2.5rem] pb-[2rem] text-center text-5xl">
-            Welcome to Confess
-          </h1>
+      <Container maxWidth="md">
 
-          {register ? <Login /> : <Register />}
-          <Button onClick={onclick}>Don't have a account register here</Button>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          // minHeight="100vh"
+          bgcolor={'black'}
+          marginTop={"2rem"}
+          color={'white'}
+        // id="cont"
+        // background="black"
+        >
+          <Container component="main" maxWidth="md"
+            className='p-[1.6rem] m-[2rem]  bg-black rounded-md bg-clip-padding backdrop-filter 
+         backdrop-blur-lg bg-opacity-1  border-gray-100 flex flex-col items-center justify-center
+rounded-[1rem] text-[#e7f4f2] shadow-[4px_4px_25px_rgba(8,_112,_184,_0.7)]' >
+            <div className="flex items-center justify-center "> <Avatar src={logo} sx={{
+              height: "130px",
+              width: "130px"
+            }} /></div>
+            <h1 className="text-[#b3ccdb] pb-[.5rem] text-center text-5xl">
+              Welcome to Crypt
+            </h1>
+            <Stack>
+            {register ? <Login /> : <Register />}
+            <Button onClick={onclick}>Don't have a account register here</Button>
+            </Stack>
+          </Container>
         </Box>
       </Container>
+
+      {/* </Container> */}
     </>
   );
 };
