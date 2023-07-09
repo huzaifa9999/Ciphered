@@ -60,12 +60,12 @@ rounded-[1rem] text-[#e7f4f2] shadow-[4px_4px_25px_rgba(8,_112,_184,_0.7)] ' >
             <Avatar src={userInfo?.pfp} sx={{ height: 220, width: 220 }} />
             <div className='flex flex-col md:items-start items-center gap-5 p-[.5rem] ml-[3rem]'>
 
-              <h2 className='text-[1.2rem] text-white  '>Username :
-                <span className='m-[.2rem] ml-[1rem] text-[3rem]'>{userInfo?.username}</span></h2>
-              <p className='text-[1.2rem] text-white '>Name:
-                <span className='m-[.2rem] text-[2rem] ml-[1rem]'>{userInfo?.name}</span></p>
-              <p className='text-[1.2rem] text-white '>Email:
-                <span className='m-[.2rem] text-[2rem] ml-[1rem] text-right'>{userInfo?.email}</span></p>
+              <h2 className='text-[1.2rem] text-[#b3ccdb]  '>Username :
+                <span className='m-[.2rem] ml-[1rem] text-[3rem] text-[#6d78ba] font-bold '>{userInfo?.username}</span></h2>
+              <p className='text-[1.2rem] text-[#b3ccdb] '>Name:
+                <span className='m-[.2rem] text-[2rem] ml-[1rem] text-[#6d78ba] font-semi-bold'>{userInfo?.name}</span></p>
+              <p className='text-[1.2rem] text-[#b3ccdb] '>Email:
+                <span className='m-[.2rem] text-[2rem] ml-[1rem] text-[#6d78ba] font-semi-bold'>{userInfo?.email}</span></p>
             </div>
           </div>
 

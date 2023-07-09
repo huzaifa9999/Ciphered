@@ -9,26 +9,38 @@ import img from "../assests/wp5814594-naruto-uzumaki-minimal-art-wallpapers.jpg"
 import UserCard from "../components/UserCard";
 
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../actions/userActions";
 // import { UserState } from "../Context";
 
 const Mbar = () => {
-// const {username,userpfp}=UserState();
+    const [data, setData] = useState([]);
     const [click, setclick] = useState(false)
     const Click = () => setclick(!click);
-
-    const [data, setData] = useState([]);
     const allUsers = async () => {
         const res = await axios.get("/user/");
         const data = res.data;
         setData(data);
+
+
     };
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
 
-
+    const handleLogout = (e) => {
+        dispatch(logout());
+        navigate("/")
+    }
     useEffect(() => {
+        // userDetails();
         allUsers();
 
     }, []);
+
 
     return (
         <>
@@ -40,13 +52,25 @@ const Mbar = () => {
                 </div>
                 <div className={`flex flex-col items-center  justify-start gap-3 text-white p-[1rem] z-10 w-[100%] h-[100vh] absolute ${click ? 'left-0' : 'left-[-100%]'} ease-in-out duration-300`} id="cont">
 
-                    <Avatar alt="Remy Sharp" src={img} sx={{ width: 200, height: 200 }} />
+                    <Avatar alt="Remy Sharp" src={userInfo?.pfp} sx={{ width: 200, height: 200 }} />
 
-                    <h1 className="text-white text-[1.5rem] m-[1rem]" >huew</h1>
-                    <Button variant="outlined">EDIT PROFILE</Button>
+                    <h1 className="text-[#6d78ba] font-bold text-[3rem] m-[.5rem]" >{userInfo?.username}</h1>
+                    {/* <Button variant="outlined">EDIT PROFILE</Button> */}
+
+                    <Link to="/MyProfile"><button class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    View Profile
+                </button></Link>
+                <br>
+
+                </br>
+                {/* <Button variant="contained" onClick={handleLogout}>logout</Button>
+                 */}
+                <button onClick={handleLogout} class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Logout
+                </button>
                    
                     <div className="flex flex-col h-[100%] w-full p-[.5rem]  items-center  text-[1rem] overflow-hidden hover:overflow-y-scroll  ">
-                    <h1 className="text-center">USERS</h1>
+                    <h1 className="text-center text-[#b3ccdb] text-[3rem] m-[.75rem] font-bold">Members</h1>
                     <Stack spacing={2} width={"100%"} display={"flex"} flexDirection={"column"} alignItems={"center"}>
                     {data.map((e) => {
                         return (

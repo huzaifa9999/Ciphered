@@ -44,7 +44,7 @@ const createConfession = asyncHandler(async (req, res) => {
 
 const allConfessions= asyncHandler(async(req,res)=>{
   try{
- const confessions = await Post.find({})
+ const confessions = await Post.find({}).sort({ _id: -1 });
  res.send(confessions);
   }catch(error){console.log(error);}
 })

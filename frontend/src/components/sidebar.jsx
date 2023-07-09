@@ -23,6 +23,7 @@ const Sidebar = () => {
         const data = res.data;
         setData(data);
 
+
     };
 
     const navigate = useNavigate();
@@ -47,28 +48,27 @@ const Sidebar = () => {
 
         <>
 
-
-
             <div className="flex flex-col h-[100%] w-[10%] bg-[#0f111f]  items-center justify-start">
                 <Avatar alt="Remy Sharp" src={logo} sx={{ width: 100, height: 100 }} />
 
                 <div className="flex items-center flex-col justify-center p-[.5rem] gap-2">
                     <Avatar alt="Remy Sharp" src={userInfo?.pfp} sx={{ width: 130, height: 130 }} />
-                    <h1 className="text-white text-[1rem] m-[.5rem] "> {userInfo?.username}</h1>
-                   
+                    <h1 className="text-[#b3ccdb] font-bold text-[2.2rem] m-[.5rem] "> {userInfo?.username}</h1>
+
                 </div>
 
-               <Link to="/MyProfile"><button class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-               View Profile
-              </button></Link>
+                <Link to="/MyProfile"><button class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    View Profile
+                </button></Link>
                 <br>
 
                 </br>
                 {/* <Button variant="contained" onClick={handleLogout}>logout</Button>
                  */}
-                 <button  onClick={handleLogout} class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-      Logout
-              </button>
+                <button onClick={handleLogout} class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Logout
+                </button>
+                {/* <button className=" w-[4rem] mt-[4rem] bg-white-400 rounded-md text-white  bg-clip-padding backdrop-filter backdrop-blur-none bg-opacity-10 border border-gray-100">test+</button> */}
 
                 {/* <Profile username={username} pfp={userpfp} /> */}
 

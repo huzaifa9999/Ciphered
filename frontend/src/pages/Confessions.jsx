@@ -13,7 +13,7 @@ const Confessions = () => {
 
 
   const allConfessions = async () => {
-    const {data} = await axios.get("confession/");
+    const { data } = await axios.get("confession/");
     // const data = res.data;
     console.log(data)
     setPosts(data);
@@ -50,12 +50,12 @@ const Confessions = () => {
           </div>
 
           <Link to="/create">
-          {/* <Button variant="outlined" >Create Confession</Button>
+            {/* <Button variant="outlined" >Create Confession</Button>
            */}
 
-           <button class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] ml-[2rem] mb-[1.5rem] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                Create new Confession
-              </button>
+            <button class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] ml-[2rem] mb-[1.5rem] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+              Create new Confession
+            </button>
 
           </Link>
 
@@ -69,7 +69,7 @@ const Confessions = () => {
                       username={e.username}
                       pfp={e.pfp}
                       description={e.description}
-                      createdAt={e.createdAt.split('T')[1].slice(0,5)}
+                      createdAt={e.createdAt.split('T')[1].slice(0, 5)}
                     />
                   </>
                 );

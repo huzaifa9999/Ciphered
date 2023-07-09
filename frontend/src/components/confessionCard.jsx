@@ -18,11 +18,11 @@ const confessionCard = (e) => {
             </div>
           </div>
 
-          <div className=" text-white h-auto ml-[4.5rem] flex  mr-[.9rem] font-regular flex">
+          <div className=" text-white h-auto ml-[4.5rem] text-[1.1rem] flex  mr-[.9rem] font-regular flex">
             <p>
               {e.description}
             </p>
-            <p className="ml-3 text-slate-400">  {e.createdAt}</p>
+            <p className="ml-3 text-[#b3ccdb]">  {e.createdAt}</p>
           </div>
 
         </div>

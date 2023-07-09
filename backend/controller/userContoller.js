@@ -59,7 +59,7 @@ const authUser = asyncHandler(async (req, res) => {
 
 const allUsers = asyncHandler(async (req, res) => {
   try {
-    const users = await User.find({}, "username pfp");
+    const users = await User.find({}, "username pfp"). sort({username: 1});
 
     res.send(users);
   } catch (error) {
