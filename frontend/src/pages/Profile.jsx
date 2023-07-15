@@ -1,27 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { UserState } from '../Context';
-import logo from "../assests/icons8-batman-logo-1600-removebg-preview.png";
-// import  from "react-icons"
-import { IoArrowBackSharp } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
-import img from "../assests/wp5814594-naruto-uzumaki-minimal-art-wallpapers.jpg"
-import { Container, Box, Stack, FormControl, FormLabel, Input, Button, Avatar, List, ListItem, ListItemButton, ListItemText, Listitem, Divider } from "@mui/material";
-import axios from 'axios';
+import { Container, Box, Stack, FormControl, FormLabel, Input, Button, Avatar, Divider } from "@mui/material";
 import { FaArrowLeft } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { userDeleteReducer } from '../reducers/userReducers';
 import { deleteProfile } from '../actions/userActions';
-const UpdateProfile = () => {
+const Profile = () => {
 
   const navigate = useNavigate();
-  // const { userId } = UserState();
   const [email, setEmail] = useState();
-  // const [loading, setLoading] = useState(false);
   const [click, setClick] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, loading, error, } = userLogin;
   const dispatch = useDispatch();
-  // const { loading, error, userInfo } = userDeleteReducer;
+
 
 
   const handleSubmit = async (e) => {
@@ -30,7 +21,6 @@ const UpdateProfile = () => {
       alert('Please enter your email')
     else dispatch(deleteProfile(email));
   }
-
   useEffect(() => {
     if (!userInfo)
       navigate("/");
@@ -42,7 +32,6 @@ const UpdateProfile = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        // minHeight="90vh"
         height="100vh"
         bgcolor={'white'}
         color={'white'}
@@ -51,21 +40,21 @@ const UpdateProfile = () => {
       >
         <Container maxWidth="md"
           className='p-[2rem] m-[2rem]  bg-black rounded-md bg-clip-padding backdrop-filter 
-         backdrop-blur-lg bg-opacity-1  border-gray-100
+         backdrop-blur-lg bg-opacity-1  border-gray-100 
 rounded-[1rem] text-[#e7f4f2] shadow-[4px_4px_25px_rgba(8,_112,_184,_0.7)] ' >
-          <h2 className=" text-4xl pb-[1.15rem] text-center text-[#b3ccdb] font-bold"> <Link to="/confessions"><FaArrowLeft size={30} /></Link>MY PROFILE</h2>
+          <h2 className=" text-4xl pb-[1.15rem] text-center text-[#b3ccdb] font-bold font-['Cormorant_Infant']"> <Link to="/confessions"><FaArrowLeft size={30} /></Link>MY PROFILE</h2>
 
           <div className='flex md:flex-row flex-col items-center justify-center gap-[4rem]'>
 
             <Avatar src={userInfo?.pfp} sx={{ height: 220, width: 220 }} />
-            <div className='flex flex-col md:items-start items-center gap-5 p-[.5rem] ml-[3rem]'>
+            <div className='flex flex-col md:items-start items-center gap-5 p-[.5rem] ml-[3rem] '>
 
-              <h2 className='text-[1.2rem] text-[#b3ccdb]  '>Username :
-                <span className='m-[.2rem] ml-[1rem] text-[3rem] text-[#6d78ba] font-bold '>{userInfo?.username}</span></h2>
-              <p className='text-[1.2rem] text-[#b3ccdb] '>Name:
-                <span className='m-[.2rem] text-[2rem] ml-[1rem] text-[#6d78ba] font-semi-bold'>{userInfo?.name}</span></p>
-              <p className='text-[1.2rem] text-[#b3ccdb] '>Email:
-                <span className='m-[.2rem] text-[2rem] ml-[1rem] text-[#6d78ba] font-semi-bold'>{userInfo?.email}</span></p>
+              <h2 className='text-[1.2rem] text-[#b3ccdb] font-["Crimson_Text"]  '>Username :
+                <span className='m-[.2rem] ml-[1rem] text-[3rem] text-[#6d78ba] font-bold font-["Cormorant_Infant"] '>{userInfo?.username}</span></h2>
+              <p className='text-[1.2rem] text-[#b3ccdb] font-["Crimson_Text"] '>Name:
+                <span className='m-[.2rem] text-[2rem] ml-[1rem] text-[#6d78ba] font-semi-bold font-["Cormorant_Infant"]'>{userInfo?.name}</span></p>
+              <p className='text-[1.2rem] text-[#b3ccdb] font-["Crimson_Text"]  '>Email:
+                <span className='m-[.2rem] text-[2rem] ml-[1rem] text-[#6d78ba] font-semi-bold font-["Cormorant_Infant"]'>{userInfo?.email}</span></p>
             </div>
           </div>
 
@@ -81,7 +70,7 @@ rounded-[1rem] text-[#e7f4f2] shadow-[4px_4px_25px_rgba(8,_112,_184,_0.7)]' >
                   <FormControl id="email" isRequired>
                     <FormLabel>EMAIL</FormLabel>
                     <Input
-                      
+
                       placeholder="Email"
                       sx={{
                         color: "white"
@@ -104,10 +93,11 @@ rounded-[1rem] text-[#e7f4f2] shadow-[4px_4px_25px_rgba(8,_112,_184,_0.7)]' >
             </> : ""
           }
         </Container>
-        <Stack direction={'row'} spacing={2} divider={<Divider orientation="vertical" flexItem />}>   {click ? "" : <Button variant="contained" color="error" onClick={() => { setClick(!click) }}>
-          delete account        </Button>}  {click ? "" : <Button variant="contained" color="error" onClick={() => { setClick(!click) }}>
-            update
-          </Button>}</Stack>
+        <Stack direction={'row'} spacing={2} divider={<Divider orientation="vertical" flexItem />}>
+          {click ? "" :
+            <Button variant="contained" color="error" onClick={() => { setClick(!click) }}>
+              delete account        </Button>}
+        </Stack>
 
 
       </Box>
@@ -116,4 +106,4 @@ rounded-[1rem] text-[#e7f4f2] shadow-[4px_4px_25px_rgba(8,_112,_184,_0.7)]' >
   )
 }
 
-export default UpdateProfile
+export default Profile

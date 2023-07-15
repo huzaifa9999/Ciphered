@@ -59,47 +59,13 @@ const authUser = asyncHandler(async (req, res) => {
 
 const allUsers = asyncHandler(async (req, res) => {
   try {
-    const users = await User.find({}, "username pfp"). sort({username: 1});
+    const users = await User.find({}, "username pfp").sort({ username: 1 });
 
     res.send(users);
   } catch (error) {
     console.log(error);
   }
 });
-
-
-const updateUser = asyncHandler(async (req, res) => {
-
-  const user = await User.findById(req.user.id);
-  if (user) {
-    user.username = req.body.username || user.username;
-    user.email = req.body.email || user.email;
-    user.name = req.body.name || user.name;
-    //This will encrypt automatically in our model
-    if (req.body.password) {
-      user.password = req.body.password || user.password;
-    }
-
-    if (req.body.pfp) {
-      user.pfp = req.body.pfp || user.pfp
-    }
-
-
-    const updateUser = await user.save();
-    res.json({
-      _id: updateUser._id,
-      name: updateUser.name,
-      password: updateUser.password,
-      pfp: updateUser.pfp,
-      email: updateUser.email,
-      token: generateToken(updateUser._id),
-    });
-  } else {
-    res.status(401);
-    throw new Error('User Not found');
-  }
-
-})
 
 
 
@@ -110,11 +76,13 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   if (user?.email === confirm?.email) {
 
-    res.json({  _id: user._id,
+    res.json({
+      _id: user._id,
       name: user.name,
       username: user.username,
       email: user.email,
-      pfp: user.pfp,});
+      pfp: user.pfp,
+    });
     await User.deleteOne({ _id: req.params.id });
     res.status(201).json("User deleted Successfully");
   }
@@ -125,4 +93,4 @@ const deleteUser = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { registerUser, authUser, allUsers, updateUser, deleteUser };
+module.exports = { registerUser, authUser, allUsers, deleteUser };

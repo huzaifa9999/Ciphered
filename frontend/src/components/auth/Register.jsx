@@ -37,7 +37,7 @@ const Register = () => {
       </Alert>;
       return;
     }
-    console.log(pfps);
+    // console.log(pfps);
     if (pfps.type === "image/jpeg" || pfps.type === "image/png" || pfps.type === "image/jpg") {
       const formData = new FormData();
       formData.append("file", pfps);
@@ -54,17 +54,18 @@ const Register = () => {
       const data = await res.json();
       setPfp(data.url.toString());
       console.log(data.url.toString());
-      // setPicLoading(false);
+      setPicLoading(false);
     } else {
       <Alert variant="filled" severity="error">
         Please upload an image only!!
       </Alert>;
-      // setPicLoading(false);
+      setPicLoading(false);
       return;
     }
   };
 
   const handleSubmit = async (e) => {
+    profilePic();
     e.preventDefault();
 
     if (!email || !username || !password || !name) {
@@ -76,7 +77,7 @@ const Register = () => {
       alert("password doesnt match");
 
     }
-    // console.log(name, email, password, pfp);
+
     else dispatch(register(name, email, username, password, pfp));
 
   };
@@ -88,109 +89,76 @@ const Register = () => {
 
   return (
     <Container component="main" maxWidth="md">
-      {/* <h2 className="center text-4xl weight-700 pb-[1rem]">Register here</h2>
-      <Stack spacing={1}>
-        <FormControl id="name" isRequired>
-          <FormLabel>Name</FormLabel>
-          <Input placeholder="Name" onChange={(e) => setName(e.target.value)} />
-          <FormControl id="username" isRequired>
-            <FormLabel>UserName</FormLabel>
-            <Input
-              placeholder="Username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </FormControl>
-        </FormControl>
-        <FormControl id="email" isRequired>
-          <FormLabel>Email</FormLabel>
-          <Input
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormControl>
-        <FormControl id="password" isRequired>
-          <FormLabel>password</FormLabel>
-          <Input
-            type={"password"}
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormControl>
-        <FormControl id="confirmpassword" isRequired>
-          <FormLabel> COnfirm password</FormLabel>
-          <Input
-            type={"password"}
-            placeholder="Confirm Password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </FormControl>
-        <FormControl id="pic">
-          <FormLabel>upload profile pic</FormLabel>
-          <Input
-            type="file"
-            p={1.5}
-            accept="image/*"
-            onChange={(e) => profilePic(e.target.files[0])}
-          />
-        </FormControl>
-
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-        // isLoading={picLoading}
-        >
-          Sign-up
-        </Button>
-      </Stack> */}
 
       <div class="w-full">
         <form class="shadow-md  px-8 pt-6 pb-8 mb-4" >
-          <div class="mb-4">
-            <label class="block text-white text-lg font-bold mb-4 text-white" for="username">
+          <div class="mb-4"  >
+            <label class="block text-white text-lg font-bold mb-4 text-white" for="username"  >
               Username
             </label>
             <input onChange={(e) => setUsername(e.target.value)}
               class="shadow  transparent  bg-[#0f111f]  border-2 border-transparent  
-            border-b-[#6d78ba] text-white  w-full py-2 px-3  leading-tight focus:outline-[#b3ccdb]  focus:shadow-outline" id="username" type="text" placeholder="Username" />
+            border-b-[#6d78ba] text-white  w-full py-2 px-3  leading-tight focus:outline-[#b3ccdb] 
+             focus:shadow-outline" id="username" type="text" placeholder="Username" />
           </div>
           <div class="mb-4">
             <label class="block text-white text-lg font-bold mb-4 text-white" for="name">
               Name
             </label>
-            <input onChange={(e) => setName(e.target.value)} class="shadow  transparent  bg-[#0f111f]  border-2 border-transparent  border-b-[#6d78ba] text-white  w-full py-2 px-3  leading-tight focus:outline-[#b3ccdb]  focus:shadow-outline" id="name" type="text" placeholder="Name" />
+            <input onChange={(e) => setName(e.target.value)} class="shadow  transparent  bg-[#0f111f] 
+             border-2 border-transparent  border-b-[#6d78ba] text-white  w-full py-2 px-3  leading-tight
+              focus:outline-[#b3ccdb]  focus:shadow-outline" id="name" type="text" placeholder="Name" />
           </div>
           <div class="mb-4">
             <label class="block text-white text-lg font-bold mb-4 text-white" for="username">
               Email
             </label>
             <input onChange={(e) => setEmail(e.target.value)}
-              class="shadow  transparent  bg-[#0f111f]  border-2 border-transparent  border-b-[#6d78ba] text-white  w-full py-2 px-3  leading-tight focus:outline-[#b3ccdb]  focus:shadow-outline" id="Email" type="text" placeholder="Email" />
+              class="shadow  transparent  bg-[#0f111f]  border-2 border-transparent  border-b-[#6d78ba]
+               text-white  w-full py-2 px-3  leading-tight focus:outline-[#b3ccdb]  focus:shadow-outline" 
+               id="Email" type="text" placeholder="Email" />
           </div>
           <div class="mb-6">
             <label class="block text-white text-lg  font-bold mb-2" for="password">
               Password
             </label>
-            <input onChange={(e) => setPassword(e.target.value)} class="shadow  transparent  bg-[#0f111f] border-2 border-transparent border-b-[#6d78ba]  w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-[#b3ccdb] focus:shadow-outline" id="password" type="password" placeholder="******************" />
+            <input onChange={(e) => setPassword(e.target.value)} class="shadow  transparent 
+             bg-[#0f111f] border-2 border-transparent border-b-[#6d78ba]  w-full py-2 px-3 text-white mb-3 
+             leading-tight focus:outline-[#b3ccdb] focus:shadow-outline" id="password" type="password"
+              placeholder="******************" />
           </div>
           <div class="mb-6">
             <label class="block text-white text-lg  font-bold mb-2" for="password">
               Confirm Password
             </label>
-            <input onChange={(e) => setConfirmPassword(e.target.value)} class="shadow  transparent  bg-[#0f111f] border-2 border-transparent border-b-[#6d78ba]  w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-[#b3ccdb] focus:shadow-outline" id="Confirmpassword" type="password" placeholder="******************" />
+            <input onChange={(e) => setConfirmPassword(e.target.value)} class="shadow  transparent
+              bg-[#0f111f] border-2 border-transparent border-b-[#6d78ba]  w-full py-2 px-3 text-white mb-3
+               leading-tight focus:outline-[#b3ccdb] focus:shadow-outline" id="Confirmpassword" type="password"
+                placeholder="******************" />
           </div>
-          <FormControl color="secondary"  className="text-white" id="pic">
-            <FormLabel color="secondary" className="text-white"><h1 className="block text-white text-lg  font-bold mb-2">upload profile pic</h1></FormLabel>
-            <Input
-            color="secondary"
-              type="file"
-              p={1.5}
-              accept="image/*"
-              onChange={(e) => profilePic(e.target.files[0])}
-            />
-          </FormControl>
+
+
+
+          <div class="flex items-center justify-center w-full">
+    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+            </svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG, JPG</p>
+        </div>
+        <input id="dropzone-file" type="file" class="hidden" onChange={(e) => profilePic(e.target.files[0])} />
+    </label>
+</div> 
+
+
           <div class="flex items-center justify-center mt-[1rem]">
-            <button onClick={handleSubmit} 
-            class="bg-[#b3ccdb] hover:bg-[#07091d] w-[15rem] hover:text-[#b3ccdb] text-[#0f111f] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline block text-xl  font-bold mb-2" type="button">
+            <button onClick={handleSubmit} loading={loading}
+
+              class="bg-[#b3ccdb] hover:bg-[#07091d] w-[15rem] hover:text-[#b3ccdb] text-[#0f111f] 
+              font-bold py-2 px-4 rounded focus:outline-none
+               focus:shadow-outline block text-xl  font-bold mb-2" type="button">
               Register
             </button>
           </div>

@@ -6,14 +6,12 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
-  USER_UPDATE_FAIL,
-  USER_UPDATE_REQUEST,
-  USER_UPDATE_SUCCESS,
   USER_DELETE_FAIL,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS
 } from "../constants/userConstants";
 import axios from "axios";
+
 
 export const login = (username, password) => async (dispatch) => {
   try {
@@ -32,9 +30,12 @@ export const login = (username, password) => async (dispatch) => {
     );
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-
+    alert('User logged in successfully')
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
+
+
+
     dispatch({
       type: USER_LOGIN_FAIL,
       payload:
@@ -43,7 +44,6 @@ export const login = (username, password) => async (dispatch) => {
           : error.message,
     });
 
-    alert("User login failed")
   }
 };
 
@@ -91,7 +91,14 @@ export const deleteProfile = (user) => async (dispatch, getState) => {
 
     const { userLogin: { userInfo },
     } = getState();
-    const { data } = await axios.post(`/user/delete/${userInfo._id}`, user);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.post(`/user/delete/${userInfo._id}`, user, config);
     localStorage.removeItem("userInfo");
     dispatch({ type: USER_DELETE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGOUT });
@@ -103,40 +110,10 @@ export const deleteProfile = (user) => async (dispatch, getState) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
+
     });
+
   }
 
 }
 
-export const updateProfile = (user) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: USER_UPDATE_REQUEST });
-
-    const {
-      userLogin: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const { data } = await axios.post("/api/users/profile", user, config);
-
-    dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
-
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-
-    localStorage.setItem("userInfo", JSON.stringify(data));
-  } catch (error) {
-    dispatch({
-      type: USER_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};

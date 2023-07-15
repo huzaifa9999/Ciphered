@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-// import "../index.css";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 import logo from "../assests/icons8-batman-logo-1600-removebg-preview.png"
-// import loginimg from "../assests/login.jpg";
 import {
   Container,
   Box,
-  Tabs,
-  Tab,
-  TabPanel,
   Button,
-  Typography,
   Avatar,
   Stack,
 } from "@mui/material";
@@ -30,12 +24,10 @@ const Home = () => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          // minHeight="100vh"
           bgcolor={'black'}
           marginTop={"2rem"}
           color={'white'}
-        // id="cont"
-        // background="black"
+        
         >
           <Container component="main" maxWidth="md"
             className='p-[1.6rem] m-[2rem]  bg-black rounded-md bg-clip-padding backdrop-filter 
@@ -45,7 +37,7 @@ rounded-[1rem] text-[#e7f4f2] shadow-[4px_4px_25px_rgba(8,_112,_184,_0.7)]' >
               height: "130px",
               width: "130px"
             }} /></div>
-            <h1 className="text-[#b3ccdb] pb-[.5rem] text-center text-5xl">
+            <h1 className="text-[#b3ccdb] pb-[.5rem] text-center text-5xl font-['Cormorant_Infant'] ">
               Welcome to Crypt
             </h1>
             <Stack>
@@ -55,8 +47,6 @@ rounded-[1rem] text-[#e7f4f2] shadow-[4px_4px_25px_rgba(8,_112,_184,_0.7)]' >
           </Container>
         </Box>
       </Container>
-
-      {/* </Container> */}
     </>
   );
 };

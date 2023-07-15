@@ -9,8 +9,6 @@ const userSchema = mongoose.Schema(
     pfp: {
       type: String,
       required: true,
-      default:
-        "https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg",
     },
   },
 

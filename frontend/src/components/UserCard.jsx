@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 const UserCard = (e) => {
-  const handleClick = () => {};
   return (
     <>
       <Box
@@ -27,8 +26,8 @@ const UserCard = (e) => {
               <Avatar alt="Remy Sharp" src={e.pfp} />
             </div>
 
-            <div className="overflow-hidden truncate mb-0 text-[#e7f4f2]  font-semi-bold">
-              <p> {e.username}</p>
+            <div className="overflow-hidden truncate mb-0 text-[#e7f4f2] font-['Cormorant_Infant'] font-regular">
+              <p className="text-[1.25rem]"> {e.username}</p>
             </div>
           </div>
         </div>

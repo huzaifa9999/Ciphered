@@ -1,14 +1,38 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./database/db");
+const http = require('http');
+const {Server} = require('socket.io');
 const userRoutes = require("./routes/userRoutes");
 const confessionRoutes= require("./routes/confessionRoutes")
 const cors = require("cors");
 dotenv.config();
 connectDB();
+
 const app = express();
+const server = http.createServer(app);
+// const io = socketIO(server);
 app.use(express.json());
 app.use(cors());
+const io= new Server(server,{
+cors:{
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST']
+}
+})
+// Socket.io event handling
+io.on('connection', (socket) => {
+  console.log('A client connected.');
+
+  socket.on('disconnect', () => {
+    console.log('A client disconnected.');
+  });
+
+  // Receive new confession from client
+  socket.on('newConfession', (confessionData) => {
+    io.emit('displayConfession', confessionData);
+  });
+});
 
 
 app.get("/", (req, res) => {
@@ -18,6 +42,6 @@ app.use("/user", userRoutes);
 
 app.use("/confession",confessionRoutes)
 
-app.listen(8080, () => {
+server.listen(8080, () => {
   console.log("server started");
 });

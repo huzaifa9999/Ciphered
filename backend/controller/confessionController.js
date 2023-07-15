@@ -6,17 +6,6 @@ const createConfession = asyncHandler(async (req, res) => {
   try {
     const { userId, description } = req.body;
     const user = await User.findById(userId);
-    // console.log(user);
-    // const newPost = new Post({
-    //   userId: user._id,
-    //   username: user.username,
-    //   pfp: user.pfp,
-    //   description,
-    // });
-    // await newPost.save();
-    // const post = await Post.find();
-    // res.status(201).json(post);
-
     const newPost = await Post.create({
      
       username: user.username,

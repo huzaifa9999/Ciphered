@@ -4,30 +4,53 @@ import Mbar from "../components/Mbar";
 import logo from "../assests/icons8-batman-logo-1600-removebg-preview.png";
 import "../index.css";
 import { useNavigate, Link } from "react-router-dom";
+import io from 'socket.io-client';
 import axios from "axios";
 import ConfCard from "../components/confessionCard";
 import Sidebar from "../components/sidebar";
+import { useSelector } from "react-redux";
+const socket = io.connect('http://localhost:8080');
+
 const Confessions = () => {
+
+
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const [posts, setPosts] = useState([]);
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo, loading, error, } = userLogin;
 
-  const allConfessions = async () => {
-    const { data } = await axios.get("confession/");
-    // const data = res.data;
-    console.log(data)
-    setPosts(data);
 
-  };
+
+
 
 
   const navigate = useNavigate();
   useEffect(() => {
-
+    const allConfessions = async () => {
+      
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+      const { data } = await axios.get("confession/",config);
+      console.log(data)
+      setPosts(data);
+  
+    };
+    if (!userInfo)
+      navigate("/");
     allConfessions();
 
-  }, []);
+  }, [navigate, userInfo]);
 
+  useEffect(() => {
+    socket.on('displayConfession', (confession) => {
+      setPosts((prevPosts) => [confession,...prevPosts ]);
+    });
+  }, []);
 
   return (
     <>
@@ -43,37 +66,47 @@ const Confessions = () => {
             </div>
             <div>
               {" "}
-              <h1 className="text-white text-4xl  truncate">CRYPT</h1>
+              <h1 className="text-white font-semi-bold text-5xl font-['Cormorant_Infant'] truncate">CRYPT</h1>
 
             </div>
 
           </div>
 
           <Link to="/create">
-            {/* <Button variant="outlined" >Create Confession</Button>
-           */}
-
-            <button class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f] ml-[2rem] mb-[1.5rem] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            <button class="bg-[#b3ccdb] hover:bg-[#07091d] hover:text-[#b3ccdb] text-[#0f111f]
+             ml-[2rem] mb-[1.5rem] font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
               Create new Confession
             </button>
 
           </Link>
 
-          <div className=" ml-[1rem] mb-[1rem] w-[100%] h-[100%] flex flex-col flex-grow text-white  overflow-hidden hover:overflow-y-scroll ">
+          <div className=" ml-[1rem] mb-[1rem] w-[100%] h-[100%] flex flex-col flex-grow text-white  
+          overflow-hidden hover:overflow-y-scroll ">
 
             <Stack spacing={2}>
-              {posts.map((e) => {
+              {/* {posts.map((e) => {
                 return (
                   <>
+                 
                     <ConfCard
                       username={e.username}
                       pfp={e.pfp}
                       description={e.description}
-                      createdAt={e.createdAt.split('T')[1].slice(0, 5)}
+                      // createdAt={e.createdAt.split('T')[1].slice(0, 5)}
                     />
+               
                   </>
                 );
-              })}
+              })} */}
+              {posts.map((confession) => (
+                <ConfCard
+                  key={confession._id}
+                  username={confession.username}
+                  pfp={confession.pfp}
+                  description={confession.description}
+                  createdAt={confession.createdAt}
+                />
+              ))}
             </Stack>
           </div>
 

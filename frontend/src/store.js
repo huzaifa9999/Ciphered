@@ -4,7 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import {
   userLoginReducer,
   userRegisterReducer,
-  userUpdateReducer,
+  // userUpdateReducer,
 } from "./reducers/userReducers";
 import { createStoreHook } from "react-redux";
 
@@ -12,7 +12,7 @@ const reducer = combineReducers({
 
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  userUpdate: userUpdateReducer,
+  // userUpdate: userUpdateReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
