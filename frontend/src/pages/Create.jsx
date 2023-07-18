@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Box, Stack, FormControl, TextareaAutosize } from "@mui/material";
 import { useSelector } from 'react-redux';
+import baseUrl from '../components/baseUrl';
 import { FaArrowLeft } from 'react-icons/fa';
 import io from 'socket.io-client';
-const socket = io.connect('http://localhost:8080');
+const socket = io.connect(`${baseUrl}`);
 const CreateConfession = () => {
 
   const navigate = useNavigate();
@@ -74,8 +75,8 @@ const CreateConfession = () => {
           <Stack spacing={4}>
             <FormControl isRequired>
               <TextareaAutosize id="confession" minRows={6} cols={15} placeholder='Keep in mind about users privacy , dont write anything personal about anyone'
-              
-               className='text-[#b3ccdb] p-[1rem] text-[1.5rem] text-bold capitalize  bg-[#0f111f]/[0.85]'
+
+                className='text-[#b3ccdb] p-[1rem] text-[1.5rem] text-bold capitalize  bg-[#0f111f]/[0.85]'
 
                 onChange={(e) => setConfession(e.target.value)}
               />

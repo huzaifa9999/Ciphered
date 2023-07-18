@@ -9,7 +9,8 @@ import axios from "axios";
 import ConfCard from "../components/confessionCard";
 import Sidebar from "../components/sidebar";
 import { useSelector } from "react-redux";
-const socket = io.connect('http://localhost:8080');
+import baseUrl from "../components/baseUrl";
+const socket = io.connect(`${baseUrl}`);
 
 const Confessions = () => {
 

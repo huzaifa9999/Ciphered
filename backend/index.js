@@ -6,6 +6,7 @@ const {Server} = require('socket.io');
 const userRoutes = require("./routes/userRoutes");
 const confessionRoutes= require("./routes/confessionRoutes")
 const cors = require("cors");
+const path = require("path");
 dotenv.config();
 connectDB();
 
@@ -42,6 +43,14 @@ app.use("/user", userRoutes);
 
 app.use("/confession",confessionRoutes)
 
-server.listen(8080, () => {
+//production script
+
+app.use(express.static("../frontend/build"));
+app.get("*",(req,res)=>{
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"))
+});
+
+
+server.listen(process.env.PORT, () => {
   console.log("server started");
 });
