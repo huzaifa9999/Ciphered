@@ -73,7 +73,9 @@ const CreateConfession = () => {
           <h2 className=" text-5xl pb-[1.15rem] text-center text-[#b3ccdb] font-bold"><Link to="/confessions"><FaArrowLeft size={30} /></Link>Confess here</h2>
           <Stack spacing={4}>
             <FormControl isRequired>
-              <TextareaAutosize id="confession" minRows={6} cols={15} className='text-[#b3ccdb] p-[1rem] text-[1.5rem] text-bold capitalize  bg-[#0f111f]/[0.85]'
+              <TextareaAutosize id="confession" minRows={6} cols={15} placeholder='Keep in mind about users privacy , dont write anything personal about anyone'
+              
+               className='text-[#b3ccdb] p-[1rem] text-[1.5rem] text-bold capitalize  bg-[#0f111f]/[0.85]'
 
                 onChange={(e) => setConfession(e.target.value)}
               />

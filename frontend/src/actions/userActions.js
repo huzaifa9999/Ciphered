@@ -37,12 +37,14 @@ export const login = (username, password) => async (dispatch) => {
 
 
     dispatch({
+    
       type: USER_LOGIN_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
     });
+    alert("an error occurred check creds")
 
   }
 };
@@ -73,7 +75,7 @@ export const register = (name, email, username, password, pfp) => async (dispatc
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
-  } catch (error) {
+  } catch (error) { alert("register failed")
     dispatch({
       type: USER_REGISTER_FAIL,
       payload:

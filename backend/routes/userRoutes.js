@@ -7,5 +7,4 @@ router.route("/").post(registerUser);
 router.post('/login', authUser);
 router.route("/delete/:id").post(authMiddleware,deleteUser);
 
-
 module.exports = router;
