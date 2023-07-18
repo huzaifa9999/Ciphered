@@ -16,10 +16,7 @@ const server = http.createServer(app);
 app.use(express.json());
 app.use(cors());
 const io= new Server(server,{
-cors:{
-  origin: 'http://localhost:3000',
-  methods: ['GET', 'POST']
-}
+
 })
 // Socket.io event handling
 io.on('connection', (socket) => {
