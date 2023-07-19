@@ -1,3 +1,3 @@
-const baseUrl="https://crypt-app.azurewebsites.net"
+const baseUrl="https://crypt-app.azurewebsites.net/"
 
 export default baseUrl;

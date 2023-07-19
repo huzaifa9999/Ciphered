@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import baseUrl from '../components/baseUrl';
 import { FaArrowLeft } from 'react-icons/fa';
 import io from 'socket.io-client';
-const socket = io.connect(`${baseUrl}`);
+const socket = io.connect(baseUrl);
 const CreateConfession = () => {
 
   const navigate = useNavigate();

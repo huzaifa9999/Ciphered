@@ -16,6 +16,9 @@ const server = http.createServer(app);
 app.use(express.json());
 app.use(cors());
 const io= new Server(server,{
+  cors:{
+    methods: ['GET', 'POST']
+  }
 
 })
 // Socket.io event handling
@@ -41,8 +44,9 @@ app.use("/user", userRoutes);
 app.use("/confession",confessionRoutes)
 
 //production script
+
 const __dirname1=path.resolve();
-app.use(express.static(path.join(__dirname1,"../frontend/build")))
+app.use(express.static(path.join(__dirname1,"./frontend/build")))
 app.get("*",(req,res)=>{
   res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"));
 })

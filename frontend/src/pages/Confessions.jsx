@@ -10,7 +10,7 @@ import ConfCard from "../components/confessionCard";
 import Sidebar from "../components/sidebar";
 import { useSelector } from "react-redux";
 import baseUrl from "../components/baseUrl";
-const socket = io.connect(`${baseUrl}`);
+const socket = io.connect(baseUrl);
 
 const Confessions = () => {
 
