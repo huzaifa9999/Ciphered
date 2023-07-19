@@ -14,9 +14,10 @@ const app = express();
 const server = http.createServer(app);
 // const io = socketIO(server);
 app.use(express.json());
-app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
+// app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
+
+app.use(cors());
 app.options('*', cors());
-// app.use(cors());
 const io= new Server(server,{
   cors:{
     methods: ['GET', 'POST']
@@ -53,6 +54,6 @@ app.get("*",(req,res)=>{
   res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"));
 })
 
-server.listen(443, () => {
+server.listen(8080, () => {
   console.log("server started");
 });
