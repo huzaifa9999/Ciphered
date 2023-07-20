@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
 
 //   res.send("its runiing ites go");
 // });
-app.use(express.static("./frontend/build/"));
+app.use(express.static("./frontend/build/index.html"));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
 })
