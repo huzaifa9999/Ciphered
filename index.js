@@ -17,7 +17,6 @@ app.use(express.json());
 // app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
 
 app.use(cors());
-// app.options('*', cors());
 const io= new Server(server,{
   cors:{
     methods: ['GET', 'POST'],
