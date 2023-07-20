@@ -30,12 +30,12 @@ const Home = () => {
         
         >
           <Container component="main" maxWidth="md"
-            className='p-[1.6rem] m-[2rem]  bg-black rounded-md bg-clip-padding backdrop-filter 
+            className='p-[1.6rem] m-[1rem]  bg-black rounded-md bg-clip-padding backdrop-filter 
          backdrop-blur-lg bg-opacity-1  border-gray-100 flex flex-col items-center justify-center
 rounded-[1rem] text-[#e7f4f2] shadow-[4px_4px_25px_rgba(8,_112,_184,_0.7)]' >
             <div className="flex items-center justify-center "> <Avatar src={logo} sx={{
-              height: "130px",
-              width: "130px"
+              height: "170px",
+              width: "170px"
             }} /></div>
             <h1 className="text-[#b3ccdb] pb-[.5rem] text-center text-5xl font-['Cormorant_Infant'] ">
               Welcome to Crypt

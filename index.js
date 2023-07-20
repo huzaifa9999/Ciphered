@@ -17,10 +17,11 @@ app.use(express.json());
 // app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
 
 app.use(cors());
-app.options('*', cors());
+// app.options('*', cors());
 const io= new Server(server,{
   cors:{
-    methods: ['GET', 'POST']
+    methods: ['GET', 'POST'],
+    origin:"http://localhost:3000"
   }
 
 })
@@ -40,6 +41,7 @@ io.on('connection', (socket) => {
 
 
 // app.get("/", (req, res) => {
+
 //   res.send("its runiing");
 // });
 app.use("/user", userRoutes);
