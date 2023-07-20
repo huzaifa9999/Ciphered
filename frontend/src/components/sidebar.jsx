@@ -20,7 +20,7 @@ const Sidebar = () => {
                 Authorization: `Bearer ${userInfo.token}`,
             },
         };
-        const res = await axios.get("/user/", config);
+        const res = await axios.get("https://crypt-app.azurewebsites.net/user/", config);
         const data = res.data;
         setData(data);
 

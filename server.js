@@ -41,13 +41,15 @@ io.on('connection', (socket) => {
 
 //   res.send("its runiing ites go");
 // });
-app.use(express.static("./frontend/build/index.html"));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
-})
+
 app.use("/user", userRoutes);
 
 app.use("/confession", confessionRoutes)
+app.use(express.static("./frontend/build"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+})
+
 
 //production script
 
