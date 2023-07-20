@@ -49,7 +49,7 @@ app.use("/confession", confessionRoutes)
 // app.get("*", (req, res) => {
 //   res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
 // })
-const buildPath = path.normalize(path.join(__dirname, '../frontend/build'));
+const buildPath = path.normalize(path.join(__dirname, './frontend/build'));
 app.use(express.static(buildPath));
 const rootRouter = express.Router();
 rootRouter.get('(/*)?', async (req, res, next) => {
