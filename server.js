@@ -38,8 +38,6 @@ io.on('connection', (socket) => {
   });
 });
 
-
-
 app.use("/user", userRoutes);
 
 app.use("/confession", confessionRoutes)
