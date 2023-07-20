@@ -2,14 +2,14 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./database/db");
 const http = require('http');
-const {Server} = require('socket.io');
+const { Server } = require('socket.io');
 const userRoutes = require("./routes/userRoutes");
-const confessionRoutes= require("./routes/confessionRoutes")
+const confessionRoutes = require("./routes/confessionRoutes")
 const cors = require("cors");
 const path = require("path");
 dotenv.config();
 connectDB();
-
+const Port = process.env.PORT || 8080
 const app = express();
 const server = http.createServer(app);
 // const io = socketIO(server);
@@ -17,10 +17,10 @@ app.use(express.json());
 // app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
 
 app.use(cors());
-const io= new Server(server,{
-  cors:{
+const io = new Server(server, {
+  cors: {
     methods: ['GET', 'POST'],
-    origin:"http://localhost:3000"
+    origin: "http://localhost:3000"
   }
 
 })
@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 });
 app.use("/user", userRoutes);
 
-app.use("/confession",confessionRoutes)
+app.use("/confession", confessionRoutes)
 
 //production script
 
@@ -55,6 +55,6 @@ app.use("/confession",confessionRoutes)
 //   res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"));
 // })
 
-server.listen(8080, () => {
-  console.log("server started");
+server.listen(Port, () => {
+  console.log(`server started ${Port} `);
 });
