@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 });
 app.get("/", (req, res) => {
 
-  res.send("its runiing");
+  res.send("its runiing ites go");
 });
 
 app.use("/user", userRoutes);
