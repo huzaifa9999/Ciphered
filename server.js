@@ -45,11 +45,17 @@ io.on('connection', (socket) => {
 app.use("/user", userRoutes);
 
 app.use("/confession", confessionRoutes)
-app.use(express.static("./frontend/build"));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
-})
-
+// app.use(express.static("./frontend/build"));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+// })
+const buildPath = path.normalize(path.join(__dirname, '../frontend/build'));
+app.use(express.static(buildPath));
+const rootRouter = express.Router();
+rootRouter.get('(/*)?', async (req, res, next) => {
+  res.sendFile(path.join(buildPath, 'index.html'));
+});
+app.use(rootRouter);
 
 //production script
 
