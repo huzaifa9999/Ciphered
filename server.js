@@ -39,21 +39,21 @@ io.on('connection', (socket) => {
 });
 
 
-app.get("/", (req, res) => {
+// app.get("/", (req, res) => {
 
-  res.send("its runiing");
-});
+//   res.send("its runiing");
+// });
 app.use("/user", userRoutes);
 
 app.use("/confession", confessionRoutes)
 
 //production script
 
-// const __dirname1=path.resolve();
-// app.use(express.static(path.join(__dirname1,"./frontend/build")))
-// app.get("*",(req,res)=>{
-//   res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"));
-// })
+const __dirname1=path.resolve();
+app.use(express.static(path.join(__dirname1,"./frontend/build")))
+app.get("*",(req,res)=>{
+  res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"));
+})
 
 server.listen(Port, () => {
   console.log(`server started ${Port} `);
