@@ -37,6 +37,10 @@ io.on('connection', (socket) => {
     io.emit('displayConfession', confessionData);
   });
 });
+app.get("/", (req, res) => {
+
+  res.send("its runiing");
+});
 
 app.use("/user", userRoutes);
 
@@ -50,10 +54,7 @@ app.use("/confession", confessionRoutes)
 //   res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"));
 // })
 
-app.get("/", (req, res) => {
 
-  res.send("its runiing");
-});
 server.listen(Port, () => {
   console.log(`server started ${Port} `);
 });
