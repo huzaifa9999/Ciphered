@@ -37,11 +37,14 @@ io.on('connection', (socket) => {
     io.emit('displayConfession', confessionData);
   });
 });
-app.get("/", (req, res) => {
+// app.get("/", (req, res) => {
 
-  res.send("its runiing ites go");
-});
-
+//   res.send("its runiing ites go");
+// });
+app.use(express.static("./frontend/build/"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+})
 app.use("/user", userRoutes);
 
 app.use("/confession", confessionRoutes)
