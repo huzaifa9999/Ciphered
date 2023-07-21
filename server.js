@@ -15,8 +15,8 @@ const server = http.createServer(app);
 // const io = socketIO(server);
 app.use(express.json());
 // app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
-app.use(express.static(path.join(__dirname, 'build')));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './frontend/build')));
+app.use(express.static(path.join(__dirname, './frontend/public')));
 app.use(cors());
 const io = new Server(server, {
   cors: {
