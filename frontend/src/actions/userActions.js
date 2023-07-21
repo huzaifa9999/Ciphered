@@ -24,7 +24,7 @@ export const login = (username, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:8080/user/login",
+      "https://crypt-app.azurewebsites.net/user/login",
       { username, password },
       config
     );
@@ -65,7 +65,7 @@ export const register = (name, email, username, password, pfp) => async (dispatc
     };
 
     const { data } = await axios.post(
-      "http://localhost:8080/user",
+      "https://crypt-app.azurewebsites.net/user",
       { name, email, password, username, pfp },
       config
     );
@@ -100,7 +100,7 @@ export const deleteProfile = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.post(`http://localhost:8080/user/delete/${userInfo._id}`, user, config);
+    const { data } = await axios.post(`https://crypt-app.azurewebsites.net/user/delete/${userInfo._id}`, user, config);
     localStorage.removeItem("userInfo");
     dispatch({ type: USER_DELETE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGOUT });

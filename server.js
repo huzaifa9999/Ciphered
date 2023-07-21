@@ -14,14 +14,14 @@ const app = express();
 const server = http.createServer(app);
 // const io = socketIO(server);
 app.use(express.json());
-// app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
-// app.use(express.static(path.join(__dirname, 'build')));
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
+app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 const io = new Server(server, {
   cors: {
     methods: ['GET', 'POST'],
-    origin: "http://localhost:3000"
+    origin: "*",
   }
 
 })
@@ -39,10 +39,10 @@ io.on('connection', (socket) => {
   });
 });
 
-app.get("/", (req, res) => {
+// app.get("/", (req, res) => {
 
-  res.send("its runiing ites go");
-});
+//   res.send("its runiing ites go");
+// });
 
 app.use("/user", userRoutes);
 
@@ -67,6 +67,7 @@ app.use("/confession", confessionRoutes);
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
+
 server.listen(Port, () => {
   console.log(`server started ${Port} `);
 });

@@ -36,7 +36,7 @@ const Confessions = () => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-      const { data } = await axios.get("http://localhost:8080/confession/",config);
+      const { data } = await axios.get("https://crypt-app.azurewebsites.net/confession/",config);
       console.log(data)
       setPosts(data);
   

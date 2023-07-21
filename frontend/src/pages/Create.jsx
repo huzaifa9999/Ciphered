@@ -36,7 +36,7 @@ const CreateConfession = () => {
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      const { data } = await axios.post('http://localhost:8080/confession/create', { userId, description }, config);
+      const { data } = await axios.post('https://crypt-app.azurewebsites.net/confession/create', { userId, description }, config);
       socket.emit('newConfession', { username: userInfo.username, pfp: userInfo.pfp, description, createdAt: new Date() });
       setConfession('');
       console.log(data);
