@@ -15,16 +15,9 @@ const server = http.createServer(app);
 // const io = socketIO(server);
 app.use(express.json());
 // app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
-
+// app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
-
-const buildPath = path.normalize(path.join(__dirname, './frontend/build'));
-app.use(express.static(buildPath));
-const rootRouter = express.Router();
-rootRouter.get('(/*)?', async (req, res, next) => {
-  res.sendFile(path.join(buildPath, 'index.html'));
-});
-app.use(rootRouter);
 const io = new Server(server, {
   cors: {
     methods: ['GET', 'POST'],
@@ -45,14 +38,15 @@ io.on('connection', (socket) => {
     io.emit('displayConfession', confessionData);
   });
 });
-// app.get("/", (req, res) => {
 
-//   res.send("its runiing ites go");
-// });
+app.get("/", (req, res) => {
+
+  res.send("its runiing ites go");
+});
 
 app.use("/user", userRoutes);
 
-app.use("/confession", confessionRoutes)
+app.use("/confession", confessionRoutes);
 // app.use(express.static("./frontend/build"));
 // app.get("*", (req, res) => {
 //   res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
@@ -66,8 +60,13 @@ app.use("/confession", confessionRoutes)
 // app.get("*",(req,res)=>{
 //   res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"));
 // })
+// app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url 
+// HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+});
 server.listen(Port, () => {
   console.log(`server started ${Port} `);
 });
