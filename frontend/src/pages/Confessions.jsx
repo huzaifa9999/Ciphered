@@ -21,11 +21,6 @@ const Confessions = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, loading, error, } = userLogin;
 
-
-
-
-
-
   const navigate = useNavigate();
   useEffect(() => {
     const allConfessions = async () => {

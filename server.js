@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 // const io = socketIO(server);
 app.use(express.json());
-app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
+// app.use(cors({ origin: /http:\/\/(127(\.\d){3}|localhost)/}));
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
@@ -64,7 +64,7 @@ app.use("/confession", confessionRoutes);
 // HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 
-app.get('*', (req, res) => {
+app.get('*/frontend', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
