@@ -64,8 +64,8 @@ app.use("/confession", confessionRoutes);
 // HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 
-app.get('*/frontend', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, "frontend",'build', 'index.html'));
 });
 
 server.listen(Port, () => {
