@@ -9,7 +9,7 @@ const cors = require("cors");
 const path = require("path");
 dotenv.config();
 connectDB();
-
+const port=process.env.port||8080;
 const app = express();
 const server = http.createServer(app);
 // const io = socketIO(server);
@@ -21,7 +21,7 @@ app.use(cors());
 const io= new Server(server,{
   cors:{
     methods: ['GET', 'POST'],
-    origin:"http://localhost:3000"
+    origin:"*"
   }
 
 })
@@ -56,6 +56,6 @@ app.get("*",(req,res)=>{
   res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"));
 })
 
-server.listen(8080, () => {
-  console.log("server started");
+server.listen(port, () => {
+  console.log(`server started ${port}`);
 });
