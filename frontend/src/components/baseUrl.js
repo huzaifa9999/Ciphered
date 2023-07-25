@@ -1,3 +1,3 @@
-const baseUrl="https://cypt-conf.azurewebsites.net/"
+const baseUrl="http://localhost:8080/"
 
 export default baseUrl;
