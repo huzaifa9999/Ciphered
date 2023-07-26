@@ -37,7 +37,7 @@ export const login = (username, password) => async (dispatch) => {
 
 
     dispatch({
-    
+
       type: USER_LOGIN_FAIL,
       payload:
         error.response && error.response.data.message
@@ -75,7 +75,8 @@ export const register = (name, email, username, password, pfp) => async (dispatc
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
-  } catch (error) { alert("register failed")
+  } catch (error) {
+    alert("register failed")
     dispatch({
       type: USER_REGISTER_FAIL,
       payload:
@@ -90,7 +91,7 @@ export const deleteProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DELETE_REQUEST });
 
-    const { userLogin: userInfo ,
+    const { userLogin: userInfo,
     } = getState();
 
     const config = {
@@ -99,7 +100,7 @@ export const deleteProfile = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo?.token}`,
       },
     };
-    const  data  = await axios.delete(`/user/delete/${userInfo?._id}`, user, config);
+    const data = await axios.delete(`/user/delete/${userInfo?._id}`, user, config);
     localStorage.removeItem("userInfo");
     dispatch({ type: USER_DELETE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGOUT });

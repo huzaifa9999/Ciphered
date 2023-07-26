@@ -30,11 +30,9 @@ const Register = () => {
   const { loading, error, userInfo } = userRegister;
 
   const profilePic = async (pfps) => {
-    // setPicLoading(true);
+    setPicLoading(true);
     if (pfps === undefined) {
-      <Alert variant="filled" severity="error">
-        Please upload an image only!!
-      </Alert>;
+
       return;
     }
     // console.log(pfps);
@@ -56,9 +54,7 @@ const Register = () => {
       // console.log(data.url.toString());
       setPicLoading(false);
     } else {
-      <Alert variant="filled" severity="error">
-        Please upload an image only!!
-      </Alert>;
+      alert("upload a valid image")
       setPicLoading(false);
       return;
     }
@@ -69,12 +65,12 @@ const Register = () => {
     e.preventDefault();
 
     if (!email || !username || !password || !name) {
-      alert('please fiill all fields')
-      // return;
+      alert('please fill all fields')
+      return;
     }
 
     else if (password !== confirmpassword) {
-      alert("password doesnt match");
+      alert("password doesn't match");
 
     }
 

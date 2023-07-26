@@ -5,6 +5,6 @@ const router = express.Router();
 router.route("/").get(authMiddleware,allUsers);
 router.route("/").post(registerUser);
 router.post('/login', authUser);
-router.route("/delete/:id").post(authMiddleware,deleteUser);
+router.route("/delete").post(deleteUser);
 
 module.exports = router;

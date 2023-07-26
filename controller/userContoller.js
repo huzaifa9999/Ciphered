@@ -70,7 +70,7 @@ const allUsers = asyncHandler(async (req, res) => {
 
 
 const deleteUser = asyncHandler(async (req, res) => {
-  const email = req.body;
+  const { email } = req.body;
   const confirm = User.findOne({ email: email });
   const user = User.findById(req.params.id);
 
@@ -84,8 +84,7 @@ const deleteUser = asyncHandler(async (req, res) => {
       pfp: user.pfp,
     });
     await User.deleteOne({ _id: req.params.id });
-    res.status(201)
-    alert('user deleted');
+    res.status(201).json("User deleted Successfully");
   }
   else {
     res.status(409)
