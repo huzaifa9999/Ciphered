@@ -100,7 +100,7 @@ export const deleteProfile = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.post(`/user/delete/${userInfo._id}`, user, config);
+    const  data  = await axios.delete(`/user/delete/${userInfo._id}`, user, config);
     localStorage.removeItem("userInfo");
     dispatch({ type: USER_DELETE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGOUT });
