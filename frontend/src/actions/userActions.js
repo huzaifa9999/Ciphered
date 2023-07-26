@@ -87,7 +87,6 @@ export const register = (name, email, username, password, pfp) => async (dispatc
 };
 
 export const deleteProfile = (user) => async (dispatch, getState) => {
-
   try {
     dispatch({ type: USER_DELETE_REQUEST });
 
@@ -97,10 +96,10 @@ export const deleteProfile = (user) => async (dispatch, getState) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userInfo?.token}`,
       },
     };
-    const  data  = await axios.delete(`/user/delete/${userInfo._id}`, user, config);
+    const  data  = await axios.delete(`/user/delete/${userInfo?._id}`, user, config);
     localStorage.removeItem("userInfo");
     dispatch({ type: USER_DELETE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGOUT });
