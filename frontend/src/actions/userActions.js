@@ -90,7 +90,7 @@ export const deleteProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DELETE_REQUEST });
 
-    const { userLogin: { userInfo },
+    const { userLogin: userInfo ,
     } = getState();
 
     const config = {
