@@ -37,7 +37,7 @@ const Confessions = () => {
       },
     };
       const { data } = await axios.get("confession/",config);
-      console.log(data)
+      // console.log(data)
       setPosts(data);
   
     };

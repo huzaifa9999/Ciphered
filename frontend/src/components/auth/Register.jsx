@@ -53,7 +53,7 @@ const Register = () => {
       );
       const data = await res.json();
       setPfp(data.url.toString());
-      console.log(data.url.toString());
+      // console.log(data.url.toString());
       setPicLoading(false);
     } else {
       <Alert variant="filled" severity="error">

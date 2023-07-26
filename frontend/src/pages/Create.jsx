@@ -39,7 +39,7 @@ const CreateConfession = () => {
       const { data } = await axios.post('confession/create', { userId, description }, config);
       socket.emit('newConfession', { username: userInfo.username, pfp: userInfo.pfp, description, createdAt: new Date() });
       setConfession('');
-      console.log(data);
+      // console.log(data);
       setLoading(false);
       navigate('/confessions');
     } catch (error) {
