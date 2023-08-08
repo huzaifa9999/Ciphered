@@ -1,8 +1,8 @@
 <h1 align="center">
-🌐 Crypt
+🦇 Crypt
 </h1>
 <p align="center">
-MongoDB, Expressjs, React/Redux, Nodejs,ScoketIo
+MongoDB, Expressjs, React/Redux, Nodejs,SocketIo
 </p>
 
 
@@ -23,7 +23,7 @@ Client-side | Server-side
 --- | ---
 axios| bcrypt-nodejs
 babel-preset-stage-1|body-parser
-lodash | cors
+MUI | cors
 react | dotenv
 react-dom | express
 react-redux | jwt-simple
@@ -39,8 +39,4 @@ redux-thunk |SocketIO
 ![Screenshot (305)](https://github.com/huzaifa9999/Ciphered/assets/97234805/c9c2f2be-a6e3-4ccc-b78d-fe9b5df3d97b)
 ![Screenshot (302)](https://github.com/huzaifa9999/Ciphered/assets/97234805/0e2f62a4-95ea-4079-aa75-ee3f6b13ee44)
 
-
-
-
-## Screenshots
 
